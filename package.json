@@ -1,0 +1,24 @@
+{
+  "name": "e-commerce2023",
+  "version": "1.0.0",
+  "description": "e-commerce website pour produits animaliers",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "nodjs"
+  ],
+  "author": "Andre & Alexia",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  }
+}
