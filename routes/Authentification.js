@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
-router.get('/home', (req, res)=>{
-    res.json({data:'les tests sont bons!'})
-})
+//controllers
+import { register } from '../controllers/Auth.js';
+router.post('/register', register)
 
 export default router;
