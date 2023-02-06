@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import express from "express";
 import morgan from "morgan";
 import AuthentificationRoute from "./routes/Authentification.js";
-
+import categoryRoutes from "./routes/category.js";
 //create a server
 const app = express();
 
@@ -18,6 +18,7 @@ app.use(morgan("dev"));
 app.use(express.json())
 //router middleware
 app.use('/api', AuthentificationRoute);
+app.use('/api', categoryRoutes);
 
 
 //listen to server

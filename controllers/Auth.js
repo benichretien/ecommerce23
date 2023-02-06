@@ -12,7 +12,7 @@ export const register = async(req, res)=>{
         return res.json({error: "Nom est requis"})
       }
       if(!email){
-        return res.json({error: "Email est deja pris"})
+        return res.json({error: "Email est requis"})
       }
       if(!password || password.length < 6){
         return res.json({error: "Password doit etre au moins 6 caracteres"})
@@ -24,7 +24,7 @@ export const register = async(req, res)=>{
       }
       // hash password
       const hashedPassword = await hashpassword(password);
-      //enreistrer le user
+      //enregistrer le user
       const user = await new User({name,email,password: hashedPassword,}).save();
       //jsw
       const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d',});
