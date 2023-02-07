@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 //on use le schema de mongoose pour manipuler database
 const { Schema } = mongoose;
-// les proprietes du database
+// les proprietes de l'utlisateur ds le database
 const userSchema = new Schema({
     name: {
         type: String,
