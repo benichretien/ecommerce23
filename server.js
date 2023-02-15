@@ -5,6 +5,7 @@ import morgan from "morgan";
 import AuthentificationRoute from "./routes/Authentification.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
+import cors from "cors";
 //create a server
 const app = express();
 
@@ -15,6 +16,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
 .catch((err)=> console.log("DB Error ", err))
 
 // middlewares
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json())
 //router middleware
@@ -23,7 +25,7 @@ app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 
 //listen to server
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 8000;
 app.listen(port, ()=>{`Node Server is runnin on port: ${port}`})
 
 //bonjour

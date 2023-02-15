@@ -9,3 +9,24 @@
 .nav-link:hover{
     color: coral;
 }
+.header{
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: coral;
+    padding-top: 3px;
+}
+.headword{
+    font-size: 15px;
+}
+.bg-couleur{
+    background-color: coral;
+}
+.logo{
+    width: 200px;
+    height: 150px;
+    margin-top: 25px;
+    border-radius: 40px;
+    
+}

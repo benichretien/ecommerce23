@@ -12,7 +12,7 @@ export const register = async(req, res)=>{
         return res.json({error: "Nom est requis"})
       }
       if(!email){
-        return res.json({error: "Email est requis"})
+        return res.json({error: "Courriel est requis"})
       }
       if(!password || password.length < 6){
         return res.json({error: "Password doit etre au moins 6 caracteres"})
@@ -20,7 +20,7 @@ export const register = async(req, res)=>{
       // check si l'email est deja pris.
       const existinUser = await User.findOne({email: email});
       if(existinUser){
-        return res.json({error: "Email est deja pris"})
+        return res.json({error: "Courriel deja pris!"})
       }
       // hash password
       const hashedPassword = await hashpassword(password);
