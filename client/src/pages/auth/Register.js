@@ -2,11 +2,16 @@ import {useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Jumbotron from "../../components/cards/Jumbotron";
+import { useAuth } from "../../context/auth";
+import {useNavigate} from "react-router-dom";
 
  export default function Register() {
   const[name, setName]= useState("");
   const[email, setEmail]= useState("");
   const[password, setPassword]= useState("");
+  //hook
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
 
   //fonction de la form
@@ -19,7 +24,11 @@ import Jumbotron from "../../components/cards/Jumbotron";
       if(data?.error){
         toast.error(data.error);
       }else{
-        toast.success("Enregistrement reussi!")
+        window.localStorage.setItem("auth", JSON.stringify(data));
+        setAuth({...auth, token: data.token, user: data.user})
+        toast.success("Enregistrement reussi!");
+        navigate("/dashboard");
+
       }
 
     }catch(err){

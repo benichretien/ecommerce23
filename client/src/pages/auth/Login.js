@@ -2,10 +2,16 @@ import {useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Jumbotron from "../../components/cards/Jumbotron";
+import { useAuth } from "../../context/auth";
+import {useNavigate} from "react-router-dom";
 
  export default function Login() {
-  const[email, setEmail]= useState("");
-  const[password, setPassword]= useState("");
+  const[email, setEmail]= useState("andre@gmail.com");
+  const[password, setPassword]= useState("alexbaluesi");
+  // hook
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
+
   //fonction de la form
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -16,7 +22,10 @@ import Jumbotron from "../../components/cards/Jumbotron";
       if(data?.error){
         toast.error(data.error);
       }else{
+        window.localStorage.setItem("auth", JSON.stringify(data));
+        setAuth({...auth, token: data.token, user: data.user})
         toast.success("Connexion reussi!")
+        navigate("/dashboard");
       }
 
     }catch(err){

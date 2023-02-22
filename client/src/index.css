@@ -8,6 +8,7 @@
 }
 .nav-link:hover{
     color: coral;
+    cursor: pointer;
 }
 .header{
     font-size: 10px;
@@ -27,6 +28,8 @@
     width: 200px;
     height: 150px;
     margin-top: 25px;
-    border-radius: 40px;
-    
+    border-radius: 40px; 
+}
+.pointer{
+    cursor: pointer;
 }
