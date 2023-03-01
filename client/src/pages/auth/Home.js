@@ -8,7 +8,7 @@ import {useAuth} from "../../context/auth";
       <div>
         <Jumbotron title="ANIMAGO!"/>
         <h1>En construction...</h1>
-        <pre>{JSON.stringify(auth, null, 4)}</pre>
+        {/*<pre>{JSON.stringify(auth, null, 4)}</pre>*/}
         
       </div>
     );
