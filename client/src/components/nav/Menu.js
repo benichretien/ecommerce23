@@ -1,6 +1,7 @@
 import {NavLink} from "react-router-dom";
 import {useAuth} from "../../context/auth";
 import {useNavigate} from "react-router-dom";
+import logo from "../cards/logo.png";
 
 export default function Menu(){
   //hook
@@ -14,12 +15,13 @@ export default function Menu(){
     return <>
        <div className="header"><h1 className="headword">LIVRAISON GRATUITE - COMMANDER AUJOURD'HUI</h1></div>
        <ul className="nav d-flex justify-content-between shadow-sm mb-2 mt-2">
+         <img src={logo} alt="Logo" className="logo"/>
          <li className="nav-item">
            <NavLink className="nav-link active" aria-current="page" to="/">HOME</NavLink>
          </li>
          {!auth?.user ? (<>
          <li className="nav-item">
-          <NavLink className="nav-link" to="/login">CONNEXION</NavLink>
+          <NavLink className="nav-link" to="/login">CONNECTION</NavLink>
          </li>
          <li className="nav-item">
           <NavLink className="nav-link" to="/register">CREER UN COMPTE</NavLink>
@@ -33,7 +35,7 @@ export default function Menu(){
                 <ul className="dropdown-menu">
                  <li>
                     <NavLink className="nav-link" to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}>
-                      Dashboard
+                     Tableau de Bord
                     </NavLink>
                  </li>
                  <li className="nav-item">

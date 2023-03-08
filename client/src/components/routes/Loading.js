@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import LoadingGIF from "../../images/loadingpic.gif";
 
 
-export default function Loading(){
+export default function Loading({path = "login"}){
     //state
     const[count, setCount]= useState(5);
     //hook
@@ -15,7 +15,7 @@ export default function Loading(){
             setCount((currentCount)=> --currentCount);
         }, 1000);
         //rediriger apres
-        count === 0 && navigate("/login", {
+        count === 0 && navigate(`/${path}`, {
             state: location.pathname,
         });
         //cleanup

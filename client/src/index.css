@@ -3,6 +3,10 @@
     text-decoration-thickness: 3px;
     
 }
+.nav{
+    height: 80px;
+    max-height: 90px;
+}
 .nav-link{
     color:black;
 }
@@ -17,6 +21,7 @@
     justify-content: center;
     background-color: coral;
     padding-top: 3px;
+    max-height: 60px;
 }
 .headword{
     font-size: 15px;
@@ -25,11 +30,16 @@
     background-color: coral;
 }
 .logo{
-    width: 200px;
-    height: 150px;
-    margin-top: 25px;
-    border-radius: 40px; 
+    width: 100px;
+    height: 80px;
+    margin-top: 2px;
+    margin-left: 25px;
+    border-radius: 20px;
+    margin-bottom: 50px;
 }
 .pointer{
     cursor: pointer;
+}
+.nav-item{
+    margin-top: 20px;
 }

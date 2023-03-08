@@ -25,18 +25,18 @@ import {useNavigate, useLocation} from "react-router-dom";
       }else{
         window.localStorage.setItem("auth", JSON.stringify(data));
         setAuth({...auth, token: data.token, user: data.user})
-        toast.success("Connexion reussi!")
-        navigate(location.state || "/dashboard");
+        toast.success("Connection reussi!")
+        navigate(location.state || `/dashboard/${data?.user?.role === 1 ? "admin" : "user"}`);
       }
 
     }catch(err){
       console.log(err);
-      toast.error("Echec de connexion. Veuillez reessayer!")
+      toast.error("Echec de connection. Veuillez reessayer!")
     }
   }
     return (
       <div>
-        <Jumbotron title = "Connexion" subtitle="Animago!"/>
+        <Jumbotron title = "Connection" subtitle="Animago!"/>
         <div className="container">
           <div className="row">
             <div className="col-md-6 offset-md-3">
@@ -50,7 +50,7 @@ import {useNavigate, useLocation} from "react-router-dom";
                value={password} onChange={(e)=>{
                 setPassword(e.target.value);
                }} autoFocus/>
-               <button className="btn bg-couleur">Submit</button>
+               <button className="btn bg-couleur">Soumettre</button>
              </form>
             </div>
           </div>

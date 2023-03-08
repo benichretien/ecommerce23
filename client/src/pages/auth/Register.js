@@ -60,7 +60,7 @@ import {useNavigate} from "react-router-dom";
                value={password} onChange={(e)=>{
                 setPassword(e.target.value);
                }} autoFocus/>
-               <button className="btn bg-couleur">Submit</button>
+               <button className="btn bg-couleur">Soumettre</button>
              </form>
             </div>
           </div>
