@@ -2,7 +2,7 @@ import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import UserMenu from "../../components/nav/UserMenu";
 
-export default function UserDashboard (){
+export default function UserCommandes (){
     const [auth, setAuth]= useAuth();
     return <>
        <Jumbotron title={`Hello ${auth?.user?.name}`} subtitle="Tableau de bord"/>
@@ -13,11 +13,8 @@ export default function UserDashboard (){
                 <UserMenu/>
              </div>
              <div className="col-md-9">
-                <div className="p-3 mt-2 mb-2 h4 bg-light">Information utilisateur</div>
-                <ul className="list-group">
-                    <li className="list-group-item">{auth?.user?.name}</li>
-                    <li className="list-group-item">{auth?.user?.email}</li>
-                </ul>
+                <div className="p-3 mt-2 mb-2 h4 bg-light">Commandes</div>
+                historique de commandes.....
              </div>
          </div>
        </div>
