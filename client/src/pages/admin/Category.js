@@ -42,6 +42,29 @@ export default function AdminCategory (){
 
     }
 
+    const handleDelete = async(e) => {
+      e.preventDefault()
+      try {
+         const {data} = await axios.delete(`/category/${selected._id}`)
+         if(data?.error){
+            toast.error(data.error)
+         }else{
+            toast.success(`"${data.name}" est supprime!`)
+            setSelected(null);
+            loadCategories()
+            setIsModalOpen(false)
+         }
+         
+      } catch (error) {
+         console.log(error)
+         toast.error("Cette categorie est deja supprime. Essayez de nouveau!")
+      }
+
+    }
+
+
+
+
     const handleOk = () => {
     setIsModalOpen(false);
     };
@@ -104,7 +127,8 @@ export default function AdminCategory (){
                      </div>))}
                 </div>
                 <Modal title="Mise a jour de la categorie" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
-                  <CategoryForm value ={updatingName} setValue={setUpdatingName} handleSubmit={handleUpdate}/>
+                  <CategoryForm value ={updatingName} setValue={setUpdatingName} 
+                  handleSubmit={handleUpdate} buttonText="Mise a jour" handleDelete={handleDelete}/>
                 </Modal>
              </div>
          </div>
