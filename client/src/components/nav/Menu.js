@@ -21,7 +21,7 @@ export default function Menu(){
          </li>
          {!auth?.user ? (<>
          <li className="nav-item">
-          <NavLink className="nav-link" to="/login">CONNECTION</NavLink>
+          <NavLink className="nav-link" to="/login">CONNEXION</NavLink>
          </li>
          <li className="nav-item">
           <NavLink className="nav-link" to="/register">CREER UN COMPTE</NavLink>
@@ -39,7 +39,7 @@ export default function Menu(){
                     </NavLink>
                  </li>
                  <li className="nav-item">
-                   <a onClick={logout} className="nav-link">Logout</a>
+                   <a onClick={logout} className="nav-link">Deconnexion</a>
                  </li>
                 </ul> 
               </li>
