@@ -4,6 +4,8 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
+import CategoryForm from "../../components/forms/CategoryForm";
+import { Modal } from "antd";
 
 export default function AdminCategory (){
    //le contexte
@@ -12,6 +14,41 @@ export default function AdminCategory (){
     const [name, setName]= useState("");
     
     const [categories, setCategories] = useState([])
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    const [selected, setSelected] = useState(null);
+
+    const [updatingName, setUpdatingName] = useState("")
+
+    const handleUpdate = async(e) => {
+      e.preventDefault()
+      try {
+         const {data} = await axios.put(`/category/${selected._id}`, {name: updatingName})
+         if(data?.error){
+            toast.error(data.error)
+         }else{
+            toast.success(`"${data.name}" est mis a jour`)
+            setSelected(null);
+            setUpdatingName("")
+            loadCategories()
+            setIsModalOpen(false)
+         }
+         
+      } catch (error) {
+         console.log(error)
+         toast.error("Cette categorie existe deja. Essayez de nouveau!")
+      }
+
+    }
+
+    const handleOk = () => {
+    setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+    setIsModalOpen(false);
+    };
 
     useEffect(()=>{
       loadCategories();
@@ -35,7 +72,7 @@ export default function AdminCategory (){
          }else{
             loadCategories();
             setName("");
-            toast.success(`"${data.name}" is created`)
+            toast.success(`"${data.name}" a ete cree`)
          }
 
       } catch (err){
@@ -53,23 +90,22 @@ export default function AdminCategory (){
              </div>
              <div className="col-md-9">
                 <div className="p-3 mt-2 mb-2 h4 bg-light">Gerer les categories</div>
-                <div className="p-3">
-                  <form onSubmit={handleSubmit}>
-                     <input type="text" className="form-control p-3"
-                     placeholder="ecris le nom de la categorie"
-                     value={name}
-                     onChange={(e) => setName(e.target.value)}/>
-                     <button className="btn btn-primary mt-3">Soumettre</button>
-                  </form>
-                </div>
+                <CategoryForm value ={name} setValue={setName} handleSubmit={handleSubmit}/>
                 <hr/>
                 <div className="d-flex flex-wrap">
                      {categories.map((c) => (<div key={c._id}>
-                        <button className="btn btn-outline-primary m-3">
+                        <button type="primary" className="btn btn-outline-primary m-3" onClick={()=>{
+                           setIsModalOpen(true);
+                           setSelected(c);
+                           setUpdatingName(c.name);
+                        }}>
                            {c.name}
                         </button>
                      </div>))}
                 </div>
+                <Modal title="Mise a jour de la categorie" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                  <CategoryForm value ={updatingName} setValue={setUpdatingName} handleSubmit={handleUpdate}/>
+                </Modal>
              </div>
          </div>
        </div>
