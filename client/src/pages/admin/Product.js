@@ -4,6 +4,8 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import { Select } from 'antd';
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const {Option} = Select;
 
@@ -18,6 +20,7 @@ export default function AdminProduct (){
     const [category, setCategory] = useState("");
     const [shipping, setShipping]= useState("");
     const [quantity, setQuantity]= useState("");
+    const navigate = useNavigate();
 
     useEffect(()=>{
       loadCategories();
@@ -30,6 +33,33 @@ export default function AdminProduct (){
       } catch (error) {
          console.log(error)
       }
+    }
+    const handleSubmit = async(e) => {
+      e.preventDefault();
+      try {
+        const productData = new FormData();
+        productData.append("photo", photo);
+        productData.append("name", name);
+        productData.append("description", description);
+        productData.append("price", price);
+        productData.append("category", category);
+        productData.append("shipping", shipping);
+        productData.append("quantity", quantity);
+        
+        const {data} = await axios.post("/product", productData);
+        if(data?.error){
+          toast.error(data.error)
+        }else {
+          toast.success(`"${data.name}" est cree`);
+          navigate("/dashboard/admin/products")
+
+        }
+        
+      } catch (error) {
+        console.log(error)
+        toast.error("echec de la creation du produit. Essayez de nouveau")
+      }
+
     }
 
 
@@ -66,11 +96,46 @@ export default function AdminProduct (){
                    />
                   </label>
                 </div>
+
+                <input type="text" className="form-control p-2 mb-3" placeholder="ecrire un nom" value={name} onChange={(e) => setName(e.target.value)}/>
+                <textarea type="text" 
+                className="form-control p-3 mb-3" 
+                placeholder="ecrire une description" 
+                value={description} 
+                onChange={(e) => setDescription(e.target.value)}
+                />
+
+                <input type="number" 
+                className="form-control p-2 mb-3" 
+                placeholder="entrez un prix" 
+                value={price} 
+                onChange={(e) => setPrice(e.target.value)}
+                />
+
+
+
+
                 <Select showSearch bordered={false} size="large" className="form-select mb-3" placeholder="choisis une categorie"
                  onChange={(value) => setCategory(value)}
                 >
-                  {categories?.map((c)=><Option key={c._id} value={c.name}>{c.name}</Option>)}
+                  {categories?.map((c)=><Option key={c._id} value={c._id}>{c.name}</Option>)}
                 </Select>
+
+                <Select bordered={false} size="large" className="form-select mb-3" placeholder="choisir la livraison"
+                 onChange={(value) => setShipping(value)}
+                >
+                  <Option value="0">Non</Option>
+                  <Option value="1">Oui</Option>
+                </Select>
+
+                <input type="number" 
+                min="1"
+                className="form-control p-2 mb-3" 
+                placeholder="entrez une quantite" 
+                value={quantity} 
+                onChange={(e) => setQuantity(e.target.value)}
+                />
+                <button onClick={handleSubmit} className="btn btn-primary mb-5">Soumettre</button>
              </div>
          </div>
        </div>
