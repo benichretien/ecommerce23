@@ -43,3 +43,9 @@
 .nav-item{
     margin-top: 20px;
 }
+.card-body{
+    text-decoration: none;
+}
+.card{
+    text-decoration: none;
+}

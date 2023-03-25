@@ -100,19 +100,19 @@ export const update = async(req, res)=>{
         //la validation
         switch(true){
             case !name.trim():
-                res.json({error: "Le nom est requis!"});
+                return res.json({error: "Le nom est requis!"});
             case !description.trim():
-                res.json({error: "La description est requise!"});
+                return res.json({error: "La description est requise!"});
             case !price.trim():
-                res.json({error: "Le prix est requis!"}); 
+                return res.json({error: "Le prix est requis!"}); 
             case !category.trim():
-                res.json({error: "La categorie est requise!"});  
+                return res.json({error: "La categorie est requise!"});  
             case !quantity.trim():
-                res.json({error: "La quantite est requise!"});
+                return res.json({error: "La quantite est requise!"});
             case !shipping.trim():
-                res.json({error: "Le shipping est requis!"});
+                return res.json({error: "Le shipping est requis!"});
             case photo && photo.size > 1000000:
-                res.json({error: "La photo doit etre 1MB de taille"})
+                return res.json({error: "La photo doit etre 1MB de taille"})
         }
         //update un produit
         const product = await Product.findByIdAndUpdate(req.params.productId, {
