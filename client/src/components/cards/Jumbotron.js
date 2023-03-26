@@ -1,5 +1,4 @@
 import "../cards/jumbotron.css";
-import logo from "../cards/logo.png";
 
 export default function Jumbotron({title, subtitle="L'endroit prefere d'article animalier"}){
     return <div className="container-fluid jumbotron">

@@ -1,4 +1,3 @@
-import moment from "moment"
 import { Badge } from "antd"
 
 export default function ProductCart({p}) {
