@@ -28,7 +28,7 @@ import ProductCart from "../../components/cards/ProductCard";
 
     return (
       <div>
-        <Jumbotron title="ANIMAGO!" subtitle="Bienvenue sur votre site favoris"/>
+        <Jumbotron title="ANIMAGO!" subtitle="Bienvenue sur votre site favoris de produits animaliers"/>
 
         <div className="row">
           <div className="col-md-6">
