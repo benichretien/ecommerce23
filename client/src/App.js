@@ -3,6 +3,7 @@ import {Toaster} from "react-hot-toast";
 import Home from "./pages/auth/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Shop from "./pages/Shop";
 import Menu from "./components/nav/Menu";
 import AdminCategory from "./pages/admin/Category";
 import AdminProduct from "./pages/admin/Product";
@@ -31,6 +32,7 @@ const PageNotFound = () => {
     <Toaster/>
        <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/shop" element={<Shop/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/dashboard" element={<PrivateRoute/>}>
