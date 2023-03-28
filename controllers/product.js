@@ -132,3 +132,164 @@ export const update = async(req, res)=>{
         return res.status(400).json(err.messsage);
     }
 }
+
+export const filteredProducts = async (req, res) => {
+    try {
+      const { checked, radio } = req.body;
+  
+      let args = {};
+      if (checked.length > 0) args.category = checked;
+      if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+      console.log("args => ", args);
+  
+      const products = await Product.find(args);
+      console.log("filtered products query => ", products.length);
+      res.json(products);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  export const productsCount = async (req, res) => {
+    try {
+      const total = await Product.find({}).estimatedDocumentCount();
+      res.json(total);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  export const listProducts = async (req, res) => {
+    try {
+      const perPage = 6;
+      const page = req.params.page ? req.params.page : 1;
+  
+      const products = await Product.find({})
+        .select("-photo")
+        .skip((page - 1) * perPage)
+        .limit(perPage)
+        .sort({ createdAt: -1 });
+  
+      res.json(products);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  export const productsSearch = async (req, res) => {
+    try {
+      const { keyword } = req.params;
+      const results = await Product.find({
+        $or: [
+          { name: { $regex: keyword, $options: "i" } },
+          { description: { $regex: keyword, $options: "i" } },
+        ],
+      }).select("-photo");
+  
+      res.json(results);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  export const relatedProducts = async (req, res) => {
+    try {
+      const { productId, categoryId } = req.params;
+      const related = await Product.find({
+        category: categoryId,
+        _id: { $ne: productId },
+      })
+        .select("-photo")
+        .populate("category")
+        .limit(3);
+  
+      res.json(related);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  export const getToken = async (req, res) => {
+    try {
+      gateway.clientToken.generate({}, function (err, response) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.send(response);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  export const processPayment = async (req, res) => {
+    try {
+      // console.log(req.body);
+      const { nonce, cart } = req.body;
+  
+      let total = 0;
+      cart.map((i) => {
+        total += i.price;
+      });
+      // console.log("total => ", total);
+  
+      let newTransaction = gateway.transaction.sale(
+        {
+          amount: total,
+          paymentMethodNonce: nonce,
+          options: {
+            submitForSettlement: true,
+          },
+        },
+        function (error, result) {
+          if (result) {
+            // res.send(result);
+            // create order
+            const order = new Order({
+              products: cart,
+              payment: result,
+              buyer: req.user._id,
+            }).save();
+            // decrement quantity
+            decrementQuantity(cart);
+            // const bulkOps = cart.map((item) => {
+            //   return {
+            //     updateOne: {
+            //       filter: { _id: item._id },
+            //       update: { $inc: { quantity: -0, sold: +1 } },
+            //     },
+            //   };
+            // });
+  
+            // Product.bulkWrite(bulkOps, {});
+  
+            res.json({ ok: true });
+          } else {
+            res.status(500).send(error);
+          }
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  const decrementQuantity = async (cart) => {
+    try {
+      // build mongodb query
+      const bulkOps = cart.map((item) => {
+        return {
+          updateOne: {
+            filter: { _id: item._id },
+            update: { $inc: { quantity: -0, sold: +1 } },
+          },
+        };
+      });
+  
+      const updated = await Product.bulkWrite(bulkOps, {});
+      console.log("blk updated", updated);
+    } catch (err) {
+      console.log(err);
+    }
+  };

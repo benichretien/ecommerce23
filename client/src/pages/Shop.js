@@ -12,6 +12,7 @@ export default function Shop() {
   const [checked, setChecked] = useState([]); // categories
   const [radio, setRadio] = useState([]); // radio
 
+
   useEffect(() => {
     if (!checked.length || !radio.length) loadProducts();
   }, []);
