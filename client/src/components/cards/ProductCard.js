@@ -1,6 +1,6 @@
 import { Badge } from "antd"
 
-export default function ProductCart({p}) {
+export default function ProductCard({p}) {
     return (
         <div className="card mb-3 hoverable">
             <Badge.Ribbon text={`${p?.sold} vendu`} color="red">

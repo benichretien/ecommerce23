@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Toaster} from "react-hot-toast";
-import Home from "./pages/auth/Home";
+import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Shop from "./pages/Shop";
