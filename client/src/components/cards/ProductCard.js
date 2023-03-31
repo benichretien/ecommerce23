@@ -1,7 +1,11 @@
 import { Badge } from "antd"
 import {useNavigate} from "react-router-dom";
+import { useCart } from "../../context/cart";
+import toast from "react-hot-toast";
 
 export default function ProductCard({p}) {
+  //hooks
+  const [cart, setCart] = useCart();
   const navigate = useNavigate();
     return (
         <div className="card mb-3 hoverable">
@@ -33,11 +37,18 @@ export default function ProductCard({p}) {
                     Voir le produit
                 </button>
 
-                <button className="btn btn-outline-primary col card-button" style={{borderBottomRightRadius: "5px"}}>Ajouter au panier</button>
+                <button 
+                  className="btn btn-outline-primary col card-button" 
+                  style={{borderBottomRightRadius: "5px"}} 
+                  onClick={() => {
+                    setCart([...cart, p])
+                    toast.success("produit ajoute au panier!")
+                  }}
+                  >
+                  Ajouter au panier
+                </button>
             </div>
 
-           {/*<p>{moment(p.createdAt).fromNow()}</p>
-           <p>{p.sold} vendu</p>*/}
       </div>
     )
 }

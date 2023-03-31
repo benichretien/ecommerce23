@@ -4,14 +4,17 @@ import {useNavigate} from "react-router-dom";
 import logo from "../cards/logo.png";
 import Search from "../forms/Search";
 import useCategory from "../../hooks/useCategory";
+import { useCart } from "../../context/cart";
+import { Badge } from "antd";
 
 export default function Menu(){
   //context
   const [auth, setAuth] = useAuth();
+  const [cart, setCart] = useCart();
   //hooks
   const categories = useCategory();
   const navigate = useNavigate();
-  
+
   const logout = () => {
     setAuth({...auth, user: null, token: ""})
     window.localStorage.removeItem("auth");
@@ -22,18 +25,18 @@ export default function Menu(){
        <ul className="nav d-flex justify-content-between shadow-sm mb-2 mt-2">
          <img src={logo} alt="Logo" className="logo"/>
          <li className="nav-item">
-           <NavLink className="nav-link active" aria-current="page" to="/">HOME</NavLink>
+           <NavLink className="nav-link active" aria-current="page" to="/" style={{textDecoration:"none"}}>HOME</NavLink>
          </li>
 
          <li className="nav-item">
-           <NavLink className="nav-link active" aria-current="page" to="/shop">PRODUITS</NavLink>
+           <NavLink className="nav-link active" aria-current="page" to="/shop" style={{textDecoration:"none"}}>PRODUITS</NavLink>
          </li>
 
 
          <div className="dropdown">
              <li style={{marginTop:"21px"}}>
                 <a className="nav-link pointer dropdown-toggle" data-bs-toggle="dropdown">
-                 Categories
+                 CATEGORIES
                 </a>
                 <ul className="dropdown-menu" style={{height:"300px", overflow:"scroll"}}>
 
@@ -53,8 +56,17 @@ export default function Menu(){
              
           </div>
 
-
          <Search/>
+
+         <li className="nav-item">
+           <Badge count = {cart?.length >= 1 ? cart.length : 0}
+           offset={[-5, 11]}
+           showZero={true}
+           >
+             <NavLink className="nav-link active" aria-current="page" to="/cart" style={{textDecoration:"none"}}>CART</NavLink>
+           </Badge>
+          
+         </li>
 
 
          {!auth?.user ? (<>

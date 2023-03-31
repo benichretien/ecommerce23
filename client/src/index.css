@@ -3,6 +3,10 @@
     text-decoration-thickness: 3px;
     
 }
+.active:hover{
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
 .form-control {
   -webkit-box-shadow: none !important;
   outline: -webkit-focus-ring-color auto 0px !important;
