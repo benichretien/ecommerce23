@@ -3,6 +3,10 @@
     text-decoration-thickness: 3px;
     
 }
+.form-control {
+  -webkit-box-shadow: none !important;
+  outline: -webkit-focus-ring-color auto 0px !important;
+}
 .nav{
     height: 80px;
     max-height: 90px;

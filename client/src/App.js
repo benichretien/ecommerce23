@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Shop from "./pages/Shop";
+import Search from "./pages/Search";
 import Menu from "./components/nav/Menu";
 import AdminCategory from "./pages/admin/Category";
 import AdminProduct from "./pages/admin/Product";
@@ -15,6 +16,8 @@ import AdminProductUpdate from "./pages/admin/ProductUpdate";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
 import PrivateRoute from "./components/routes/PrivateRoute";
+import ProductView from "./pages/ProductView";
+
 
 
 
@@ -33,6 +36,8 @@ const PageNotFound = () => {
        <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/shop" element={<Shop/>}/>
+          <Route path="/search" element={<Search/>}/>
+          <Route path="/product/:slug" element={<ProductView/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/dashboard" element={<PrivateRoute/>}>

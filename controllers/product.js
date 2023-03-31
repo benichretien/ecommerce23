@@ -275,7 +275,7 @@ export const filteredProducts = async (req, res) => {
     }
   };
   
-  const decrementQuantity = async (cart) => {
+  export const decrementQuantity = async (cart) => {
     try {
       // build mongodb query
       const bulkOps = cart.map((item) => {

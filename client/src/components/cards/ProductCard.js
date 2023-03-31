@@ -1,6 +1,8 @@
 import { Badge } from "antd"
+import {useNavigate} from "react-router-dom";
 
 export default function ProductCard({p}) {
+  const navigate = useNavigate();
     return (
         <div className="card mb-3 hoverable">
             <Badge.Ribbon text={`${p?.sold} vendu`} color="red">
@@ -27,17 +29,15 @@ export default function ProductCard({p}) {
             </div>
 
             <div className="d-flex justify-content-between">
-                <button className="btn btn-primary col card-button" style={{borderBottomLeftRadius: "5px"}}>
+                <button className="btn btn-primary col card-button" style={{borderBottomLeftRadius: "5px"}} onClick={()=> navigate(`/product/${p.slug}`)}>
                     Voir le produit
                 </button>
 
                 <button className="btn btn-outline-primary col card-button" style={{borderBottomRightRadius: "5px"}}>Ajouter au panier</button>
             </div>
 
-
-
            {/*<p>{moment(p.createdAt).fromNow()}</p>
            <p>{p.sold} vendu</p>*/}
-        </div>
+      </div>
     )
 }

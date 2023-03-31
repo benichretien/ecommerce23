@@ -2,6 +2,7 @@ import {NavLink} from "react-router-dom";
 import {useAuth} from "../../context/auth";
 import {useNavigate} from "react-router-dom";
 import logo from "../cards/logo.png";
+import Search from "../forms/Search";
 
 export default function Menu(){
   //hook
@@ -23,6 +24,8 @@ export default function Menu(){
          <li className="nav-item">
            <NavLink className="nav-link active" aria-current="page" to="/shop">SHOP</NavLink>
          </li>
+
+         <Search/>
 
 
          {!auth?.user ? (<>
@@ -52,6 +55,7 @@ export default function Menu(){
              
           </div>
           )
+          
         }
       </ul>
     </>
