@@ -35,7 +35,7 @@ const PageNotFound = () => {
   return (
     <BrowserRouter>
     <Menu/>
-    <Toaster/>
+    <Toaster position="top-right"/>
        <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/shop" element={<Shop/>}/>
