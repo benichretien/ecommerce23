@@ -3,11 +3,15 @@ import {useAuth} from "../../context/auth";
 import {useNavigate} from "react-router-dom";
 import logo from "../cards/logo.png";
 import Search from "../forms/Search";
+import useCategory from "../../hooks/useCategory";
 
 export default function Menu(){
-  //hook
+  //context
   const [auth, setAuth] = useAuth();
+  //hooks
+  const categories = useCategory();
   const navigate = useNavigate();
+  
   const logout = () => {
     setAuth({...auth, user: null, token: ""})
     window.localStorage.removeItem("auth");
@@ -22,8 +26,33 @@ export default function Menu(){
          </li>
 
          <li className="nav-item">
-           <NavLink className="nav-link active" aria-current="page" to="/shop">SHOP</NavLink>
+           <NavLink className="nav-link active" aria-current="page" to="/shop">PRODUITS</NavLink>
          </li>
+
+
+         <div className="dropdown">
+             <li style={{marginTop:"21px"}}>
+                <a className="nav-link pointer dropdown-toggle" data-bs-toggle="dropdown">
+                 Categories
+                </a>
+                <ul className="dropdown-menu" style={{height:"300px", overflow:"scroll"}}>
+
+                    <li>
+                      <NavLink className="nav-link" to="/categories">
+                        Tous les categories
+                      </NavLink>
+                    </li>
+
+                   {categories?.map(c => (<li>
+                     <NavLink className="nav-link" to={`/category/${c.slug}`}>
+                      {c.name}
+                     </NavLink></li>))
+                    }
+                </ul> 
+              </li>
+             
+          </div>
+
 
          <Search/>
 
