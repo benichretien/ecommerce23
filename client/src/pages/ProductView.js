@@ -108,6 +108,8 @@ export default function ProductView() {
                 <div className="col-md-3">
                  <h2>Produits Relatifs</h2>
                  <hr/>
+                 {related?.length < 1 && <p>Nothing found</p>}
+                 {related?.map((p) => (<ProductCard p={p} key={p._id} />))}
                     
                 </div>
 
