@@ -28,10 +28,16 @@ export default function CategoryView() {
 
   return (
     <>
-      <Jumbotron title={category?.name} subtitle={`${products?.length} produits trouves dans ${category?.name}`}/>
+      <Jumbotron title={category?.name} subtitle={`${products?.length} produits trouves dans "${category?.name}"`}/>
 
       <div className="container-fluid">
-        hghghghg
+        <div className="row mt-3">
+          {products?.map((p) => (
+            <div key={p._id} className="col-md-4">
+              <ProductCard p={p} />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
