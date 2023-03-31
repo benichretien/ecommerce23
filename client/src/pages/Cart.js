@@ -2,6 +2,7 @@ import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 import Jumbotron from "../components/cards/Jumbotron";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 export default function Cart(){
      // context
@@ -42,7 +43,25 @@ export default function Cart(){
                                        <img 
                                            src={`${process.env.REACT_APP_API}/product/photo/${p._id}`}
                                            alt={p.name}
+                                           style={{
+                                              height:"150px", 
+                                              width: "150px",
+                                              objectFit: "cover",
+                                              marginLeft: "-12px",
+                                              borderRopRightRadius: "0px",
+                                            }}
                                         />
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                           <h5 className="card-title">{p.name}</h5>
+                                           <p className="card-text">{`${p?.description?.substring(0, 50)}..`}</p>
+                                           <p className="card-text">
+                                              <small className="text-muted">
+                                                 Publié {moment(p.createdAt).fromNow()}
+                                              </small>
+                                           </p>
+                                        </div>
                                     </div>
                                 </div>
                            </div>))}
