@@ -18,4 +18,5 @@ export const hashpassword = (password)=>{
 // comparer le passw de l'user avec celui dans le database
 export const comparePassword = (password, hashed)=>{
     return bcrypt.compare(password,hashed);
+    
 }

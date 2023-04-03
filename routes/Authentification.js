@@ -3,7 +3,7 @@ const router = express.Router();
 //middlewares
 import { requireSignin, isAdmin } from '../middlewares/auth.js';
 //controllers
-import { login, register, secret } from '../controllers/Auth.js';
+import { login, register, secret, updateProfile } from '../controllers/Auth.js';
 router.post('/register', register)
 router.post("/login", login);
 router.get("/auth-check", requireSignin, (req, res)=>{
@@ -12,6 +12,8 @@ router.get("/auth-check", requireSignin, (req, res)=>{
 router.get("/admin-check", requireSignin, isAdmin, (req, res)=>{
     res.json({ok: true});
 })
+
+router.put("/profile", requireSignin, updateProfile);
 //testing et on use le middleware pour verifier le token
 router.get('/secret', requireSignin, isAdmin, secret)
 

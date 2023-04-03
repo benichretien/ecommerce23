@@ -41,7 +41,8 @@ export default function ProductCard({p}) {
                   className="btn btn-outline-primary col card-button" 
                   style={{borderBottomRightRadius: "5px"}} 
                   onClick={() => {
-                    setCart([...cart, p])
+                    setCart([...cart, p]);
+                    localStorage.setItem("cart", JSON.stringify([...cart, p]));
                     toast.success("produit ajoute au panier!")
                   }}
                   >
