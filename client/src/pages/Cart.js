@@ -54,9 +54,9 @@ export default function Cart(){
                 <div className="row">
                     <div className="col-md-8">
                         <div className="row"> 
-                          {cart?.map((p) => (
+                          {cart?.map((p, index) => (
                            <div 
-                              key={p._id} 
+                              key={index} 
                               className="card mb-3" 
                               //style={{maxWidth:540}}
                               >
