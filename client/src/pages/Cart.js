@@ -4,7 +4,7 @@ import Jumbotron from "../components/cards/Jumbotron";
 import { useNavigate } from "react-router-dom";
 import ProductCardHorizontal from "../components/cards/ProductCardHorizontal";
 import UserCartSidebar from "../components/cards/UserCartSidebar";
-import moment from "moment";
+
 
 export default function Cart() {
   // context
@@ -12,19 +12,8 @@ export default function Cart() {
   const [auth, setAuth] = useAuth();
   // hooks
   const navigate = useNavigate();
-  //function
-  const removeFromCart = (productId) => {
-    let myCart = [...cart];
-    let index = myCart.findIndex((item) => item._id === productId);
-    myCart.splice(index, 1);
-    setCart(myCart);
-    localStorage.setItem("cart", JSON.stringify(myCart));
-  }
-
-
-
-
-
+  
+ 
   return (
     <>
       <Jumbotron title={`Hello ${auth?.token && auth?.user?.name}`}
@@ -47,54 +36,7 @@ export default function Cart() {
           <div className="row">
             <div className="col-md-8">
               <div className="row">
-                {cart?.map((p, index) => (
-                  <div
-                    key={index}
-                    className="card mb-3"
-                  //style={{maxWidth:540}}
-                  >
-                    <div className="row g-0">
-                      <div className="col-md-4">
-                        <img
-                          src={`${process.env.REACT_APP_API}/product/photo/${p._id}`}
-                          alt={p.name}
-                          style={{
-                            height: "150px",
-                            width: "150px",
-                            objectFit: "cover",
-                            marginLeft: "-12px",
-                            borderRopRightRadius: "0px",
-                          }}
-                        />
-                      </div>
-                      <div className="col-md-8">
-                        <div className="card-body">
-                          <h5 className="card-title">
-                            {p.name}
-                            &nbsp;&nbsp;
-
-                            {p?.price?.toLocaleString("en-US", { style: "currency", currency: "CAD", })}
-                          </h5>
-                          <p className="card-text">{`${p?.description?.substring(0, 50)}..`}</p>
-
-                        </div>
-                      </div>
-
-                      <div className="d-flex justify-content-between">
-                        <p className="card-text">
-                          <small className="text-muted">
-                            Publié {moment(p.createdAt).fromNow()}
-                          </small>
-                        </p>
-
-                        <p className="text-danger mb-2 pointer" onClick={() => removeFromCart(p._id)}>
-                          Supprimer
-                        </p>
-
-                      </div>
-
-                    </div>
-                  </div>))}
+                {cart?.map((p, index) => (<ProductCardHorizontal key={index} p={p} />))}
               </div>
             </div>
 

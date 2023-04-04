@@ -57,7 +57,7 @@ export default function UserCartSidebar() {
             setLoading(false);
             localStorage.removeItem("cart");
             setCart([]);
-            navigate("/dashboard/user/orders");
+            navigate("/dashboard/user/commandes");
             toast.success("Payment successful");
         } catch (err) {
             console.log(err);
@@ -68,21 +68,21 @@ export default function UserCartSidebar() {
     return (
         <div className="col-md-4 mb-5">
             <h4>Your cart summary</h4>
-            Total / Address / Payments
+            Total / Adresse / Paiements
             <hr />
             <h6>Total: {cartTotal()}</h6>
             {auth?.user?.address ? (
                 <>
                     <div className="mb-3">
                         <hr />
-                        <h4>Delivery address:</h4>
+                        <h4>Adresse de livraison:</h4>
                         <h5>{auth?.user?.address}</h5>
                     </div>
                     <button
                         className="btn btn-outline-warning"
                         onClick={() => navigate("/dashboard/user/profile")}
                     >
-                        Update address
+                        Mettre à jour l'adresse
                     </button>
                 </>
             ) : (
@@ -92,7 +92,7 @@ export default function UserCartSidebar() {
                             className="btn btn-outline-warning"
                             onClick={() => navigate("/dashboard/user/profile")}
                         >
-                            Add delivery address
+                            Ajouter l'adresse de livraison
                         </button>
                     ) : (
                         <button
@@ -103,7 +103,7 @@ export default function UserCartSidebar() {
                                 })
                             }
                         >
-                            Login to checkout
+                            Se connecter pour passer à la caisse
                         </button>
                     )}
                 </div>

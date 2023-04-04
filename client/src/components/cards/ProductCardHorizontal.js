@@ -48,7 +48,7 @@ export default function ProductCardHorizontal({ p, remove = true }) {
         <div className="d-flex justify-content-between">
           <p className="card-text">
             <small className="text-muted">
-              Listed {moment(p.createdAt).fromNow()}
+              Publié {moment(p.createdAt).fromNow()}
             </small>
           </p>
           {remove && (
@@ -56,7 +56,7 @@ export default function ProductCardHorizontal({ p, remove = true }) {
               className="text-danger mb-2 pointer"
               onClick={() => removeFromCart(p._id)}
             >
-              Remove
+              Supprimer
             </p>
           )}
         </div>
