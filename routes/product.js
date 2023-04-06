@@ -7,7 +7,7 @@ const router = express.Router();
 import { requireSignin, isAdmin } from '../middlewares/auth.js';
 //controllers
 import {create, liste, read, photo, remove, update, filteredProducts, 
-    productsCount, listProducts, productsSearch, relatedProducts, processPayment, getToken
+    productsCount, listProducts, productsSearch, relatedProducts, processPayment, getToken, orderStatus
 } from "../controllers/product.js"
 //faut etre admin pour creer un produit
 router.post('/product', requireSignin, isAdmin, formidable(), create);
@@ -27,5 +27,6 @@ router.get("/products/search/:keyword", productsSearch);
 router.get("/related-products/:productId/:categoryId", relatedProducts);
 router.get("/braintree/token", getToken);
 router.post("/braintree/payment", requireSignin, processPayment);
+router.put("/order-status/:orderId", requireSignin, isAdmin, orderStatus);
 
 export default router;

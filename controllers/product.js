@@ -315,8 +315,8 @@ export const filteredProducts = async (req, res) => {
         to: order.buyer.email,
         subject: "Order status",
         html: `
-          <h1>Hi ${order.buyer.name}, Your order's status is: <span style="color:red;">${order.status}</span></h1>
-          <p>Visit <a href="${process.env.CLIENT_URL}/dashboard/user/orders">your dashboard</a> for more details</p>
+          <h1>Salut ${order.buyer.name}, Le statut de votre commande est : <span style="color:red;">${order.status}</span></h1>
+          <p>Visite <a href="${process.env.CLIENT_URL}/dashboard/user/orders">votre tableau de bord</a> pour plus détails</p>
         `,
       };
   

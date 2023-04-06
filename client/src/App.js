@@ -10,7 +10,7 @@ import AdminCategory from "./pages/admin/Category";
 import AdminProduct from "./pages/admin/Product";
 import AdminProducts from "./pages/admin/Products";
 import UserProfile from "./pages/user/Profile";
-import UserCommandes from "./pages/user/Commandes";
+import UserOrders from "./pages/user/Orders";
 import Dashboard from "./pages/user/Dashboard";
 import AdminProductUpdate from "./pages/admin/ProductUpdate";
 import AdminDashboard from "./pages/admin/Dashboard";
@@ -20,6 +20,7 @@ import ProductView from "./pages/ProductView";
 import CategoriesList from "./pages/CategoriesList";
 import CategoryView from "./pages/CategoryView";
 import Cart from "./pages/Cart";
+import AdminOrders from "./pages/admin/Orders";
 
 
 
@@ -49,7 +50,7 @@ const PageNotFound = () => {
           <Route path="/dashboard" element={<PrivateRoute/>}>
              <Route path="user" element={<Dashboard/>}/>
              <Route path="user/profile" element={<UserProfile/>}/>
-             <Route path="user/commandes" element={<UserCommandes/>}/>
+             <Route path="user/orders" element={<UserOrders/>}/>
           </Route>
 
           <Route path="/dashboard" element={<AdminRoute/>}>
@@ -58,6 +59,7 @@ const PageNotFound = () => {
              <Route path="admin/product" element={<AdminProduct/>}/>
              <Route path="admin/products" element={<AdminProducts/>}/>
              <Route path="admin/product/update/:slug" element={<AdminProductUpdate/>}/>
+             <Route path="admin/orders" element={<AdminOrders />} />
           </Route>
           <Route path="*" element={<PageNotFound/>} replace/>
        </Routes>

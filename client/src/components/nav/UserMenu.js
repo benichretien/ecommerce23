@@ -11,7 +11,7 @@ export default function UserMenu (){
            </NavLink>
          </li>
          <li>
-           <NavLink className="list-group-item" to="/dashboard/user/commandes/">
+           <NavLink className="list-group-item" to="/dashboard/user/orders/">
               Commandes
            </NavLink>
          </li>

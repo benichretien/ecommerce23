@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import Order from "../models/order.js";
 import dotenv from "dotenv";
 
+dotenv.config();
 
 
 export const register = async(req, res)=>{

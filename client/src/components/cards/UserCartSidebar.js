@@ -57,8 +57,8 @@ export default function UserCartSidebar() {
             setLoading(false);
             localStorage.removeItem("cart");
             setCart([]);
-            navigate("/dashboard/user/commandes");
-            toast.success("Payment successful");
+            navigate("/dashboard/user/orders");
+            toast.success("Paiement avec succès!");
         } catch (err) {
             console.log(err);
             setLoading(false);
