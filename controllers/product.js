@@ -4,9 +4,11 @@ import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
 import Order from "../models/order.js";
-
+import sgMail from "@sendgrid/mail";
 
 dotenv.config();
+
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 
 const gateway = new braintree.BraintreeGateway({

@@ -27,7 +27,7 @@ import {useNavigate} from "react-router-dom";
         window.localStorage.setItem("auth", JSON.stringify(data));
         setAuth({...auth, token: data.token, user: data.user})
         toast.success("Enregistrement reussi!");
-        navigate("/dashboard");
+        navigate("/dashboard/user");
 
       }
 
