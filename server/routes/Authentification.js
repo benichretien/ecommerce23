@@ -4,7 +4,7 @@ const router = express.Router();
 //middlewares
 import { requireSignin, isAdmin } from '../middlewares/auth.js';
 //controllers
-import { login, register, secret, updateProfile, getOrders, allOrders } from '../controllers/Auth.js';
+import { login, register, secret, updateProfile, getOrders, allOrders } from '../controllers/auth.js';
 router.post('/register', register)
 router.post("/login", login);
 router.get("/auth-check", requireSignin, (req, res)=>{
